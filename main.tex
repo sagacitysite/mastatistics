@@ -1,0 +1,205 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,left=2cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry} 
+\usepackage[utf8]{inputenc}
+\usepackage[american]{babel}
+\usepackage[backend=biber,style=apa]{biblatex}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{paralist}
+\usepackage{bm}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{bbm}
+\usepackage{csquotes}
+\usepackage[shortlabels]{enumitem}
+\usepackage[printonlyused]{acronym}
+\usepackage{nomencl}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{sidecap}
+\usepackage{multirow}
+\usepackage{makecell}
+
+% Define some more commands for acronyms
+\makeatletter
+\newif\if@in@acrolist
+\AtBeginEnvironment{acronym}{\@in@acrolisttrue}
+\newrobustcmd{\LU}[2]{\if@in@acrolist#1\else#2\fi}
+\newcommand{\AC}[1]{{\@in@acrolisttrue\ac{#1}}}
+\newcommand{\ACL}[1]{{\@in@acrolisttrue\acl{#1}}}
+\newcommand{\ACF}[1]{{\@in@acrolisttrue\acf{#1}}}
+\newcommand{\ACFI}[1]{{\@in@acrolisttrue\acfi{#1}}}
+\makeatother
+
+% Create nomenclature
+\makenomenclature
+
+% Set margin for wrapfig
+\setlength{\columnsep}{20pt}
+
+% Set margin for makecell
+\renewcommand\cellgape{\Gape[4pt]}
+
+% Captions position for sidecap
+\sidecaptionvpos{figure}{c}
+
+% Declare citation style
+\DeclareLanguageMapping{american}{american-apa}
+\DefineBibliographyStrings{american}{andothers={et\ al\adddot}}
+
+% Set path to references file
+\bibliography{literature}
+
+% Adjust paragraph and text spacings
+\setlength\parindent{0pt}
+\setlength{\parskip}{8pt}
+\renewcommand{\arraystretch}{1.5}
+\renewcommand{\baselinestretch}{1.5}
+\captionsetup[table]{font={footnotesize,stretch=1.1}}
+\captionsetup[figure]{font={footnotesize,stretch=1.1}}
+\captionsetup[subfigure]{font={footnotesize,stretch=1.1}}
+
+\setlist{nosep}
+
+% New commands
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Pb}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\IP}{\text{IP}}
+\newcommand{\STDP}{\text{STDP}}
+\newcommand{\MSE}{\text{MSE}}
+\newcommand{\Nsim}{N_{\text{sim}}}
+\newcommand{\mini}{\text{min}}
+\newcommand{\plastic}{\text{plastic}}
+\newcommand{\noplastic}{\text{noplastic}}
+\newcommand{\evo}{\text{evoked}}
+\newcommand{\test}{\text{test}}
+\newcommand{\compare}{\text{compare}}
+\newcommand{\Tnoplastic}{T_{\text{noplastic}}}
+\newcommand{\Tevo}{T_{\text{evoked}}}
+\newcommand{\Ttest}{T_{\text{test}}}
+\newcommand{\chunk}{\text{chunk}}
+\newcommand{\DKL}{D_{\text{KL}}(\bm\pi\|\bm\pi')}
+
+\newcommand{\starsNS}{\footnotesize (ns)}
+\newcommand{\starsS}{\footnotesize ($*$)}
+\newcommand{\starsSS}{\footnotesize ($**$)}
+\newcommand{\starsSSS}{\footnotesize ($***$)}
+
+% Theorems
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{spacing}{1.1}
+\begin{center}
+
+\Large Humboldt-Universität zu Berlin
+
+%\setlength{\parskip}{0.8em}
+%\normalsize Department of Mathematics
+
+\setlength{\parskip}{6em}
+\LARGE \textbf{Does intrinsic plasticity prefer regularity?\\ A Markov chain Monte Carlo perspective on a self-organizing recurrent neural network}
+
+\setlength{\parskip}{4em}
+\normalsize A thesis submitted for the degree of:\\ Master of Science (M.Sc) in Statistics
+
+\setlength{\parskip}{1.5em}
+\normalsize submitted by
+
+\setlength{\parskip}{1.5em}
+\Large \textbf{Carlo Michaelis}
+
+\setlength{\parskip}{0.5em}
+\normalsize born on 29th of September 1989 in Dieburg
+
+\setlength{\parskip}{4em}
+
+First supervisor: Prof. Dr. Vladimir Spokoiny
+
+\setlength{\parskip}{0.3em}
+Second supervisor: Dr. Christian Tetzlaff
+
+\vfill
+
+The thesis is published under the following license:\\ \href{https://creativecommons.org/licenses/by/4.0/}{Attribution 4.0 International (CC BY 4.0)}
+
+\end{center}
+\end{spacing}
+\newpage
+
+\section*{Selbstständigkeitserklärung}
+
+Ich versichere hiermit, dass ich die vorliegende Arbeit selbständig verfasst und keine anderen als die im Literaturverzeichnis angegebenen Quellen benutzt habe.\\ 
+Alle Stellen, die wörtlich oder sinngemäß aus veröffentlichten oder noch nicht veröffentlichten Quellen entnommen sind, sind als solche kenntlich gemacht.\\
+Die Zeichnungen oder Abbildungen in dieser Arbeit sind von mir selbst erstellt worden oder mit einem entsprechenden Quellennachweis versehen.\\ 
+Diese Arbeit ist in gleicher oder ähnlicher Form noch bei keiner anderen Prüfungsbehörde eingereicht worden.
+
+\vspace{3em}
+\noindent Berlin, 29.01.2018\\ Carlo Michaelis
+\newpage
+
+\section*{Abstract}
+
+The self-organizing recurrent neural network (SORN) is a promising approach in modeling brain processes. It extends randomly initialized reservoir networks with binary threshold neurons by three biologically motivated plasticity mechanisms: spike-timing-dependent plasticity, synaptic normalization and intrinsic plasticity. It was already shown that SORN outperforms static reservoir networks and is able to reproduce numerous experimental findings. In particular, recent findings show that spontaneous activity has a special role in this deterministic network. As former approaches used specific input patterns, in this thesis, input patterns were generalized and sampled from systematically chosen Markov chains. Results show that the performance of the network depends on the structure of the Markov chain. If chains contain some less probable and irregular states, their performance is lower and closer to results from static reservoir networks. Finally, it was hypothesized that intrinsic plasticity is the cause for this behavior, due to arising spontaneous activity in less active neurons. It was concluded that SORN does not outperform static reservoir networks in every case and that the performance is not necessarily independent from the chosen input pattern. It remains to be shown if this effect does also occur in natural networks.
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\phantomsection
+\addcontentsline{toc}{section}{List of Figures}
+\listoffigures
+\newpage
+
+\phantomsection
+\addcontentsline{toc}{section}{List of Tables}
+\listoftables
+\newpage
+
+\phantomsection
+\addcontentsline{toc}{section}{Abbrevations}
+\include{tex/abbrevations}
+\newpage
+
+\phantomsection
+\addcontentsline{toc}{section}{Nomenclature}
+\printnomenclature
+
+\include{tex/1-introduction}
+
+\include{tex/2-neurons}
+
+\include{tex/3-plasticity}
+
+\include{tex/4-sorn}
+
+\include{tex/5-markov}
+
+\include{tex/6-methods}
+
+\include{tex/7-results}
+
+\include{tex/8-discussion}
+
+\include{tex/9-appendix}
+
+\phantomsection
+\addcontentsline{toc}{section}{References}
+\printbibliography
+
+\end{document}

@@ -1,0 +1,46 @@
+\section{Introduction}
+
+In order to come closer to an understanding of the the human mind and behavior, many methods emerged in the last decades. In the late 19th century Wilhelm Wundt founded the first psychological institute in Leipzig, based on empirical research, which was the starting point of todays psychology. Some few years later, \textcite{waldeyer1891ueber} published a review about the \emph{neuron doctrine}. He supported Ramón y Cajal and August Forel suggesting that nerve-cells are the basic units of the nervous system and introduced the term \emph{neuron} \parencite{finger2001origins}. Like Max Planck was introducing the idea that energy could be quantized in 1900 in ``\emph{an act of despair ... I was ready to sacrifice any of my previous convictions about physics.}'' \parencite{baddeley2008physics}, also the theory of the neuron doctrine required a non-continuous assumption. Similar to Planck, Forel, who introduced the neuron doctrine, was struggling with the idea that the nervous system could be discrete. In his biography he stated:
+
+\begin{quote}
+It was as though the scales had fallen from my eyes. I asked myself the question: But why do we always look for anastomoses? Could not the mere intimate contact of the protoplasmic processes of the nerve-cells effect the functional connection of nervous conduction just as well as absolute continuity? [...] All the data supported the theory of simple contact. \parencite{finger2001origins}
+\end{quote}
+
+As well as the quantum theory was the beginning of modern physics, the neuron doctrine built the framework for the neuroscience as we know it today. A significant stage of development was the invention of computers in the 1940s and the fast acceleration in computational power, described by Moore's law \parencite{moore1998cramming}. Since then, it was possible to use computers for simulations. Theoretical models about the functions of synapses, neurons or networks could be tested and compared to experimental findings. When in the 1980s some few disciplines in this area grew, in 1985 Eric Schwartz was requested to organize a conference bringing researchers together. On top of the conference a book with the title \emph{Computational Neuroscience} was published, collecting contributions from the participants \parencite{schwartz1993computational}.
+
+Even if computational neuroscience is an efficient way to verify theories about the nervous system, it still depends on experimental findings. Only if computational models behave like living organisms the results are confirmed. But once a model has proven its reliability, one is able to explore even more properties very cheaply. It is even possible to test specific behavior which is very hard or even impossible to obtain in classical experiments, like resetting the brain activity or including some artificial components.
+
+Most people would probably agree that insights into the function of our mind and behavior, especially learning and memory, is important for our individual life and our society. For example to fight mental disorders and to improve education. One could argue that fighting mental disorders and education is only necessary \emph{because} we started to understand ourself and developed technologies, ending in alienation from our social and natural roots. However, it probably depends on the way the knowledge is used. Tenzin Gyatso (the 14th Dalai Lama) put it in a nutshell, when he said:
+
+\begin{quote}
+By coming to a better understanding of the workings of the mind, we can learn to tackle our disturbing emotions and mental afflictions, something we can't do with either weapons or money.
+\end{quote}
+
+\subsection{Learning and memorization of arbitrary patterns}
+
+Learning and memory are the main subjects of neuroscience, since both of them are highly dynamic and flexible, especially in mammals like the human being. Both are connected, since learning includes storing of information and changing memory is due to learning. On a neuronal level, synapses play a major role in encoding information through long-term plasticity and short-term plasticity. In general, plasticity is the driving force of changes on neuronal level.
+
+In psychology, many different memory and learning types were classified. The main important classification is temporal, and separates between long-term memory, working memory, short-term memory and sensory memory. Learning, on the other hand, can be classified in pre-attentive (unconscious) and attentive (unconscious and conscious), where the former is mostly connected to sensory memory \parencite{schroger1997detection}. It is also possible to separate between non-associative learning, where just one stimulus leads to habituation and sensitization, and associative learning, where the connection between two or more stimuli is learned.
+
+In this thesis a neural model, called \acf{sorn}, with about $200$ neurons is used to learn specific input patterns. Even though it is possible to store information for a longer time in the network, due to implemented synaptic plasticity, in most applications the network is build to store and test information on a sensory or short-term level. The learned patterns are sampled from a distribution, where the current step depends on the former step. This corresponds to associative learning, since transition probabilities need to be learned between different states representing stimuli. It is also very likely that the behavior of \acs{sorn} is similar to results from pre-attentive learning.
+
+\acs{sorn} was developed in 2009 by \textcite{lazar2009sorn} with the goal to have a simplified network, which simulates basic synaptic and neuronal mechanisms. At that time there were already a lot of networks in use in machine learning, but they are focused on specific technological applications. Biologically, they are not plausible in most cases. There were already so called \emph{reservoir networks}, but the synaptic connections, the weights, are randomly initialized and do not change while training. The idea came up to combine a reservoir network with plasticity, meaning that the weights (the strength of the synapses) are learned during a training phase. The task was to find a combination of plasticity rules which allow a stable network behavior, running at the edge of chaos \parencite{bertschinger2004real}. In her doctoral thesis, \textcite{lazarphd2009self} discusses the approach in relation to \acs{sorn} in detail.
+
+In the last years, a lot of studies used \acs{sorn} and showed that it can reproduce a lot of experimental findings \parencite{lazar2009sorn, zheng2013network, aswolinskiy2015rm, hartmann2015s}. After the network has proven its ability in replicating specific biological behavior using certain learning patterns, the question arises if the learning patterns can be generalized. For that purpose Markov chains are used to generate the input patterns.
+
+There are several goals of this research:
+
+\begin{itemize}
+\item Can \acs{sorn} learn arbitrary input patterns, modeled as Markov chains?
+\item Are there differences in the performance between different patterns?
+\item Whatever behavior will be observed, is it possible to find experimental findings supporting the observations? Or is the observation limited to \acs{sorn}?
+\item Is it possible to find an explanation for the behavior of the network?
+\end{itemize}
+
+\subsection{Structure of the thesis}
+
+In the following sections, first, the basics of neurophysiology, especially plasticity, will be explained. Afterwards, artificial neural networks in general and the specific \acf{sorn} are introduced. The theoretical part closes with an introduction to \acf{mcmc}.
+
+In the methods section, more details about \acs{sorn} are explained, including the properties of the used network, how it is trained and statistics to evaluate outcomes of the network. The methods will directly lead to the results, where in the beginning the main observation is presented, showing that the performance depends on the chosen Markov chain. In the following subsections a so called \acs{ip}-hypothesis is stated and tested.
+
+Afterwards, results are discussed regarding their biological plausibility and implication. Furthermore, on basis of the findings, further research ideas are presented. In the appendix, extending analysis were done to support some statements from the methods and results sections.
